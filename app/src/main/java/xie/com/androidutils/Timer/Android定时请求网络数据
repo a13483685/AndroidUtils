@@ -1,0 +1,88 @@
+定时器有什么用
+
+在我们Android客户端上有时候可能有些任务不是当时就执行，而是过了一个规定的时间在执行此次任务。那么这个时候定时器的作用就非常有用了。首先开启一个简单的定时器
+
+ Timer timer = new Timer();
+    TimerTask task = new TimerTask() {
+        @Override
+        public void run() {
+            try {
+                holder.post(url,"",200);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    };
+现在我就相当于定义了一个定时器，我现在的定时器是向服务器发送Post请求来返回数据刷新到我的界面上那么接下来就是开启定时器了。开启定时器那就非常简单了
+
+  timer.schedule(task,0,10000);
+开启定时器特别简单基本上一句话就搞定了
+开启定时器需要三个参数
+1.就是上面所写的你要做的事情 ，上面我写的上向网络发送请求那么这里就时开启定时器请求网络
+2.这个参数是你要多长时间后执行这个定时器，这里我写的是0，那么就是0秒后执行我的定时器。
+3.这个是最重要的这就是你每次执行时间的间隔 我这里就是说每10秒向网络发送一次请求如果写成1000就是每一秒向网络发送一次请求
+
+如果第三个参数不写的话那么定时器就是几秒后执行 那么定时器只执行一次就不在执行了
+
+定时器的请求周期
+
+其实定时器如果不销毁的话是一直执行的但其实定时器如果一直执行的话那么我们的程序根本就撑不了多长时间就会崩溃所以说定时器用完就要及时的关闭
+定时器的开启在写Fragment或者Activity的时候我一般会写在onStart里面
+如果销毁的时候会写在onStop里面销毁定时器也非常简单
+
+   timer.cancel();
+基本上这一句话就搞定了执行这句话说明是注销定时器
+当我们离开本界面的时候就执行这句话那么定时器就不会在执行了当我们进入本界面在onStart执行定时器那么就又开启了定时器所以说这样就写了一个简易版的定时器
+
+public class WhiteFragment extends Fragment{
+
+Handler handler = new Handler(){
+     public void handleMessage(Message msg){
+        switch(msg.what){
+            case 200:
+             "执行我要做的事情用来刷新UI"
+      }
+   }
+}
+
+   private String url =
+    "http://ip地址:8080/2017guosaiserver/GetAllSense";
+    HttpHolder holder = new HttpHolder(handler);
+
+   Timer timer = new Timer();
+    TimerTask task = new TimerTask() {
+        @Override
+        public void run() {
+            try {
+                holder.post(url,"",200);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    };
+}
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.whitefragment,null);
+        return view;
+}
+ @Override
+    public void onStart() {
+        super.onStart();
+        timer.schedule(task,0,10000);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        timer.cancel();
+    }
+}
+一个简单的定时器请求网络就完成了 HttpHolder holder = new HttpHolder(handler); 这是自己写的网络请求类直接调用输入url的服务器地址获得的就是服务器发来的JSON格式的数据
+在onStop里面注销定时器那么每次离开本界面的时候那么定时候就销毁了再回到本界面的时候那么就执行onStart里面的开启定时器那么定时器就开启了所以这样就避免了因为定时器开启而使程序崩溃
+
+作者：w_xiaowudi
+链接：https://www.jianshu.com/p/dd5de8dbbe81
+來源：简书
+简书著作权归作者所有，任何形式的转载都请联系作者获得授权并注明出处。

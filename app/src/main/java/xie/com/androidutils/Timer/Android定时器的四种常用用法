@@ -1,0 +1,113 @@
+通过实际项目的练习，掌握了几种android基本定时器和延时的用法，这里我想总结一下作为自己的收获，下面列出的是比较简洁的模式，方便简单地在程序中直接调用。
+一、三种常用的定时器
+1.Handler类的postDelayed方法：
+
+复制代码
+ 1 Handler mHandler = new Handler();
+ 2                  Runnable r = new Runnable() {
+ 3
+ 4                     @Override
+ 5                     public void run() {
+ 6                             //do something
+ 7                             //每隔1s循环执行run方法
+ 8                             mHandler.postDelayed(this, 1000);
+ 9                     }
+10                 };
+11
+12
+13 主线程中调用：  mHandler.postDelayed(r, 100);//延时100毫秒
+复制代码
+2.用handler+timer+timeTask方法：
+
+复制代码
+ 1 Handler handler = new Handler() {
+ 2         @Override
+ 3         public void handleMessage(Message msg) {
+ 4             if (msg.what == 1){
+ 5                 //do something
+ 6             }
+ 7             super.handleMessage(msg);
+ 8         }
+ 9     };
+10
+11     Timer timer = new Timer();
+12     TimerTask timerTask = new TimerTask() {
+13         @Override
+14         public void run() {
+15             Message message = new Message();
+16             message.what = 1;
+17             handler.sendMessage(message);
+18         }
+19     };
+20  主线程中调用：timer.schedule(timerTask,1000,500);//延时1s，每隔500毫秒执行一次run方法
+复制代码
+3.Thread+handler方法：
+
+复制代码
+ 1 Handler handler = new Handler() {
+ 2         @Override
+ 3         public void handleMessage(Message msg) {
+ 4             if (msg.what == 1){
+ 5                 //do something
+ 6             }
+ 7             super.handleMessage(msg);
+ 8
+ 9         }
+10     };
+11
+12     class MyThread extends Thread {//这里也可用Runnable接口实现
+13         @Override
+14         public void run() {
+15             while (true){
+16                 try {
+17                     Thread.sleep(1000);//每隔1s执行一次
+18                     Message msg = new Message();
+19                     msg.what = 1;
+20                     handler.sendMessage(msg);
+21                 } catch (InterruptedException e) {
+22                     e.printStackTrace();
+23                 }
+24
+25             }
+26         }
+27     }
+28 主线程中调用：new Thread(new MyThread()).start();
+复制代码
+二、三种延时的快捷方法：
+1.Handler的postDelayed方法：
+
+复制代码
+1 new Handler().postDelayed(new Runnable() {
+2
+3         @Override
+4         public void run() {
+5               //do something
+6           }
+7        }, 1000);    //延时1s执行
+复制代码
+2.timer + TimerTask方法：
+
+复制代码
+1   timer = new Timer();
+2                  timer.schedule(new TimerTask() {
+3                     @Override
+4                     public void run() {
+5                           //do something
+6                     }
+7                 },1000);//延时1s执行
+复制代码
+3.Thread方法：
+
+复制代码
+ 1  new Thread(new MyThread()).start();
+ 2         new Thread(new Runnable() {
+ 3             @Override
+ 4             public void run() {
+ 5                 try {
+ 6                     Thread.sleep(1000);//延时1s
+ 7                     //do something
+ 8                 } catch (InterruptedException e) {
+ 9                     e.printStackTrace();
+10                 }
+11             }
+12         }).start();
