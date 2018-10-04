@@ -9,6 +9,7 @@ import android.widget.Button;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
+import xie.com.androidutils.MeterDesigner.RecycleViewGallery.RecyclerViewGallery;
 import xie.com.androidutils.MeterDesigner.RecyclerViewTestActivity;
 import xie.com.androidutils.R;
 
@@ -18,6 +19,8 @@ public class MeterDesignerActivity extends AppCompatActivity {
     Button cardViewTest;
     @InjectView(R.id.RecyclerView)
     Button RecyclerView;
+    @InjectView(R.id.RecyclerViewGallerybt)
+    Button RecyclerViewGallerybt;
 //    @InjectView(R.id.RecyclerView)
 //    Button RecyclerView;
 
@@ -28,7 +31,7 @@ public class MeterDesignerActivity extends AppCompatActivity {
         ButterKnife.inject(this);
     }
 
-    @OnClick({R.id.cardViewTest, R.id.RecyclerView})
+    @OnClick({R.id.cardViewTest, R.id.RecyclerView,R.id.RecyclerViewGallerybt})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.cardViewTest:
@@ -37,15 +40,9 @@ public class MeterDesignerActivity extends AppCompatActivity {
             case R.id.RecyclerView:
                 startActivity(new Intent(this, RecyclerViewTestActivity.class));
                 break;
+            case R.id.RecyclerViewGallerybt:
+                startActivity(new Intent(this, RecyclerViewGallery.class));
+                break;
         }
     }
-
-//    @OnClick(R.id.cardViewTest)
-//    public void onClick() {
-//        startActivity(new Intent(this, CardViewActitivy.class));
-//    }
-//
-//    @OnClick(R.id.RecyclerView)
-//    public void onClick() {
-//    }
 }

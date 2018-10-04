@@ -37,7 +37,7 @@ public class RecyclerViewTestActivity extends AppCompatActivity {
         setContentView(R.layout.activity_recycler_view_test);
         initData();
         ButterKnife.inject(this);
-        adapter = new HomeAdapter();
+        initAdapter();
         toolbar.inflateMenu(R.menu.toolbar_menu);//关联目录
         rv.setItemAnimator(new DefaultItemAnimator());
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
@@ -54,20 +54,24 @@ public class RecyclerViewTestActivity extends AppCompatActivity {
                     case R.id.demo_one:
                         ToastUtils.showToast(RecyclerViewTestActivity.this,"样式一");
                         rv.setLayoutManager(new LinearLayoutManager(RecyclerViewTestActivity.this));// 线性管理器，支持横向、纵向。
+                        initAdapter();
 //                        rv.addItemDecoration(new DividerItemDecoration(RecyclerViewTestActivity.this, DividerItemDecoration.VERTICAL_LIST));
                         break;
                     case R.id.demo_two:
                         ToastUtils.showToast(RecyclerViewTestActivity.this,"样式二");
                         rv.setLayoutManager(new GridLayoutManager(RecyclerViewTestActivity.this, 4));// 网格布局管理器
+                        initAdapter();
 //                        rv.addItemDecoration(new DividerGridItemDecoration(RecyclerViewTestActivity.this));
                         break;
                     case R.id.demo_three:
                         rv.setLayoutManager(new StaggeredGridLayoutManager(4,
                                 StaggeredGridLayoutManager.HORIZONTAL));// 瀑布流水平
+                        initAdapter();
                         break;
                     case R.id.demo_four:
                         rv.setLayoutManager(new StaggeredGridLayoutManager(4,
                                 StaggeredGridLayoutManager.VERTICAL));// 瀑布流垂直
+                        initAdapter();
                         break;
 
                     case R.id.add:
@@ -93,6 +97,38 @@ public class RecyclerViewTestActivity extends AppCompatActivity {
 
     }
 
+    private void initAdapter() {
+        if(adapter!=null){
+            return;
+        }else {
+            adapter = new HomeAdapter();
+            adapter.setOnItemClickLitener(new OnItemClickLitener() {
+                @Override
+                public void onItemClick(View view, final int position) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            ToastUtils.showToast(RecyclerViewTestActivity.this,position+"click");
+                        }
+                    });
+
+                }
+
+                @Override
+                public void onItemLongClick(View view, final int position) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            ToastUtils.showToast(RecyclerViewTestActivity.this,position+"long click");
+                        }
+                    });
+
+                }
+            });
+        }
+
+    }
+
     class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHoder> {
         @NonNull
         @Override
@@ -102,9 +138,31 @@ public class RecyclerViewTestActivity extends AppCompatActivity {
             return myViewHoder;
         }
 
+        private OnItemClickLitener mOnItemClickLitener = null;
+        public void setOnItemClickLitener(OnItemClickLitener mOnItemClickLitener) {
+            this.mOnItemClickLitener = mOnItemClickLitener;
+        }
+
         @Override
-        public void onBindViewHolder(@NonNull MyViewHoder hoder, int pos) {
+        public void onBindViewHolder(@NonNull final MyViewHoder hoder, final int pos) {
             hoder.tv.setText(mDatas.get(pos));
+            if(mOnItemClickLitener!=null){
+                hoder.tv.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        int position = hoder.getLayoutPosition();
+                        mOnItemClickLitener.onItemClick(hoder.tv,position);
+                    }
+                });
+                hoder.tv.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {
+                        int position = hoder.getLayoutPosition();
+                        mOnItemClickLitener.onItemLongClick(hoder.tv,position);
+                        return false;
+                    }
+                });
+            }
         }
 
         @Override
@@ -128,6 +186,7 @@ public class RecyclerViewTestActivity extends AppCompatActivity {
             public MyViewHoder(@NonNull View itemView) {
                 super(itemView);
                 tv = (TextView) itemView.findViewById(R.id.id_num);
+
             }
         }
     }
