@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/search"
+        app:showAsAction="always"
+        android:icon="@mipmap/search"
+        android:title="搜索" />
+
+    <item
+        android:id="@+id/share"
+        app:showAsAction="always"
+        android:icon="@mipmap/share"
+        android:title="分享" />
+
+    <item
+        android:id="@+id/add"
+        app:showAsAction="always"
+        android:icon="@mipmap/add"
+        android:title="添加" />
+
+    <item
+        android:id="@+id/remove"
+        app:showAsAction="always"
+        android:icon="@mipmap/remove"
+        android:title="移除" />
+
+
+    <item
+        android:id="@+id/demo_one"
+        app:showAsAction="withText"
+        android:title="垂直排列" />
+    <item
+        android:id="@+id/demo_two"
+        app:showAsAction="withText"
+        android:title="网格排列" />
+    <item
+        android:id="@+id/demo_three"
+        app:showAsAction="withText"
+        android:title="瀑布流水平" />
+    <item
+        android:id="@+id/demo_four"
+        app:showAsAction="withText"
+        android:title="瀑布流垂直" />
+
+</menu>
