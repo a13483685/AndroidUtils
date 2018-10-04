@@ -6,16 +6,20 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import xie.com.androidutils.Activities.MeterDesignerActivity;
 import xie.com.androidutils.Timer.TimerActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     private Button mTimerButton = null;
+    private Button mMd = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mTimerButton = findViewById(R.id.timer);
         mTimerButton.setOnClickListener(this);
+        mMd = findViewById(R.id.md);
+        mMd.setOnClickListener(this);
     }
 
     @Override
@@ -25,6 +29,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.timer:
                 startActivity(new Intent(this, TimerActivity.class));
                 finish();
+                break;
+            case R.id.md:
+                startActivity(new Intent(this,MeterDesignerActivity.class));
                 break;
         }
 

@@ -16,7 +16,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Timer.TimerActivity"/>
+        <activity android:name=".Timer.TimerActivity" />
+        <activity android:name=".Activities.MeterDesignerActivity" />
+        <activity android:name=".Activities.CardViewActitivy"></activity>
     </application>
 
 </manifest>
