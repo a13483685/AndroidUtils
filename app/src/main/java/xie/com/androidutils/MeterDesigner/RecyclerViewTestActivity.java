@@ -38,6 +38,17 @@ public class RecyclerViewTestActivity extends AppCompatActivity {
         initData();
         ButterKnife.inject(this);
         adapter = new HomeAdapter();
+        adapter.setOnItemClickLitener(new OnItemClickLitener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                ToastUtils.showToast(RecyclerViewTestActivity.this,position+"click");
+            }
+
+            @Override
+            public void onItemLongClick(View view, int position) {
+                ToastUtils.showToast(RecyclerViewTestActivity.this,position+"long click");
+            }
+        });
         toolbar.inflateMenu(R.menu.toolbar_menu);//关联目录
         rv.setItemAnimator(new DefaultItemAnimator());
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
@@ -102,9 +113,31 @@ public class RecyclerViewTestActivity extends AppCompatActivity {
             return myViewHoder;
         }
 
+        private OnItemClickLitener mOnItemClickLitener = null;
+        public void setOnItemClickLitener(OnItemClickLitener mOnItemClickLitener) {
+            this.mOnItemClickLitener = mOnItemClickLitener;
+        }
+
         @Override
-        public void onBindViewHolder(@NonNull MyViewHoder hoder, int pos) {
+        public void onBindViewHolder(@NonNull final MyViewHoder hoder, final int pos) {
             hoder.tv.setText(mDatas.get(pos));
+            if(mOnItemClickLitener!=null){
+                hoder.tv.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        int position = hoder.getLayoutPosition();
+                        mOnItemClickLitener.onItemClick(hoder.tv,position);
+                    }
+                });
+                hoder.tv.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {
+                        int position = hoder.getLayoutPosition();
+                        mOnItemClickLitener.onItemLongClick(hoder.tv,position);
+                        return false;
+                    }
+                });
+            }
         }
 
         @Override
