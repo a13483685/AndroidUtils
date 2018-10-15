@@ -20,6 +20,7 @@
         <activity android:name=".Activities.MeterDesignerActivity" />
         <activity android:name=".Activities.CardViewActitivy"/>
         <activity android:name=".MeterDesigner.RecyclerViewTestActivity"/>
+        <activity android:name=".ImageLoader.ImageLoaderActivity"/>
     </application>
 
 </manifest>

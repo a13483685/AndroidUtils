@@ -18,6 +18,15 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/timer"
         android:text="MeterialDesigner"
+        android:textAllCaps="false"
+        />
+    <Button
+        android:id="@+id/imageloader"
+        android:layout_below="@id/md"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ImageLoader用法"
+        android:textAllCaps="false"
         />
 
 </RelativeLayout>
