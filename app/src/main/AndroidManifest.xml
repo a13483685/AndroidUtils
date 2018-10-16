@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="xie.com.androidutils">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -20,6 +23,7 @@
         <activity android:name=".Activities.MeterDesignerActivity" />
         <activity android:name=".Activities.CardViewActitivy"/>
         <activity android:name=".MeterDesigner.RecyclerViewTestActivity"/>
+        <activity android:name=".ImageLoader.ImageLoaderActivity"/>
     </application>
 
 </manifest>

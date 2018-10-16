@@ -11,11 +11,13 @@
     android:id="@+id/cardViewTest"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:textAllCaps="false"
     android:text="CardViewTest"/>
 <Button
     android:id="@+id/RecyclerView"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:textAllCaps="false"
     android:text="RecyclerView"
     />
 
