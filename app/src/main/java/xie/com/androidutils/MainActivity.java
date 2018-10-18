@@ -7,13 +7,18 @@ import android.view.View;
 import android.widget.Button;
 
 import xie.com.androidutils.Activities.MeterDesignerActivity;
+import xie.com.androidutils.IPC.Parcel.IpcActivity;
 import xie.com.androidutils.ImageLoader.ImageLoaderActivity;
 import xie.com.androidutils.Timer.TimerActivity;
 
+/**
+ * ipc进程通信相关的使用方法
+ */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     private Button mTimerButton = null;
     private Button mMd = null;
     private Button mImageLoader = null;
+    private Button mIpc = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +29,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mMd.setOnClickListener(this);
         mImageLoader = findViewById(R.id.imageloader);
         mImageLoader.setOnClickListener(this);
+        mIpc = findViewById(R.id.ipc);
+        mIpc.setOnClickListener(this);
     }
 
     @Override
@@ -40,7 +47,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.imageloader:
                 startActivity(new Intent(this,ImageLoaderActivity.class));
                 break;
+            case R.id.ipc:
+                startActivity(new Intent(this,IpcActivity.class));
         }
-
     }
 }

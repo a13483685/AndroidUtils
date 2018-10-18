@@ -241,7 +241,7 @@ public class ImageLoader {
         DiskLruCache.Editor edit = mDisLruCache.edit(key);
         if(edit!=null){
             OutputStream outputStream = edit.newOutputStream(DISK_CACHE_INDEX);
-            if(downloadUrlToStream(url,outputStream)){
+            if(downloadUrlToStream(url,outputStream)){//将数据下载到disk中
                 edit.commit();
             } else {
                 edit.abort();
@@ -263,7 +263,7 @@ public class ImageLoader {
             bufferedOutputStream = new BufferedOutputStream(outputStream);
             int b;
             while ((b=bufferedInputStream.read())!=-1){
-                bufferedOutputStream.write(b);
+                bufferedOutputStream.write(b);//将内容写到disk中
             }
             return true;
         } catch (IOException e) {

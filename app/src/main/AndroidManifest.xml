@@ -24,6 +24,9 @@
         <activity android:name=".Activities.CardViewActitivy"/>
         <activity android:name=".MeterDesigner.RecyclerViewTestActivity"/>
         <activity android:name=".ImageLoader.ImageLoaderActivity"/>
+        <activity android:name=".IPC.Parcel.IpcActivity"/>
+        <activity android:name=".IPC.Parcel.ParcelTestActivity"/>
+        <activity android:name=".IPC.Parcel.ParcelSecondActivity"/>
     </application>
 
 </manifest>
