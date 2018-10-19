@@ -72,13 +72,14 @@ public class User implements Parcelable {
         return 0;
     }
 
+    //序列化功能由一些列的write完成
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(this.userName);
         dest.writeString(this.userId);
         dest.writeString(this.userSex);
         dest.writeInt(this.userAge);
-        dest.writeParcelable(this.mHouse, flags);
+        dest.writeParcelable(this.mHouse, flags);//如果传递的是对象，那么必须喜欢滴flag,是当前线程的上下文加载器
     }
 
     protected User(Parcel in) {
@@ -88,16 +89,16 @@ public class User implements Parcelable {
         this.userAge = in.readInt();
         this.mHouse = in.readParcelable(House.class.getClassLoader());
     }
-
+    //反序列化由CREATOR来完成
     public static final Creator<User> CREATOR = new Creator<User>() {
         @Override
         public User createFromParcel(Parcel source) {
-            return new User(source);
+            return new User(source);//序列化对象
         }
 
         @Override
         public User[] newArray(int size) {
-            return new User[size];
+            return new User[size];//序列化数组
         }
     };
 }

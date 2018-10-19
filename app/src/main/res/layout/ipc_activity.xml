@@ -2,13 +2,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     >
     <Button
         android:id="@+id/pacelable_test"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Pacelable使用方法"
+        android:textAllCaps="false"
+        />
+
+    <Button
+        android:id="@+id/bind_use"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="bind的用法"
         android:textAllCaps="false"
         />
 

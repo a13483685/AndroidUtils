@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -21,12 +22,20 @@
         </activity>
         <activity android:name=".Timer.TimerActivity" />
         <activity android:name=".Activities.MeterDesignerActivity" />
-        <activity android:name=".Activities.CardViewActitivy"/>
-        <activity android:name=".MeterDesigner.RecyclerViewTestActivity"/>
-        <activity android:name=".ImageLoader.ImageLoaderActivity"/>
-        <activity android:name=".IPC.Parcel.IpcActivity"/>
-        <activity android:name=".IPC.Parcel.ParcelTestActivity"/>
-        <activity android:name=".IPC.Parcel.ParcelSecondActivity"/>
+        <activity android:name=".Activities.CardViewActitivy" />
+        <activity android:name=".MeterDesigner.RecyclerViewTestActivity" />
+        <activity android:name=".ImageLoader.ImageLoaderActivity" />
+        <activity android:name=".IPC.Parcel.IpcActivity" />
+        <activity android:name=".IPC.Parcel.ParcelTestActivity" />
+        <activity android:name=".IPC.Parcel.ParcelSecondActivity" />
+        <activity android:name=".IPC.BindTest.BinderUseActivity" />
+
+        <service
+            android:name=".IPC.BindTest.HouseManagerService"
+            android:enabled="true"
+            android:exported="true"
+            android:process="remote"
+            />
     </application>
 
 </manifest>
