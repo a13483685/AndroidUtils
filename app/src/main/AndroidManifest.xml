@@ -34,7 +34,7 @@
             android:name=".IPC.BindTest.HouseManagerService"
             android:enabled="true"
             android:exported="true"
-            android:process="remote"
+            android:process=":remote"
             />
     </application>
 
