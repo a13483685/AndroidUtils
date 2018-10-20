@@ -11,7 +11,7 @@ public class User implements Parcelable {
     private String userId;
     private String userSex;
     private int userAge;
-    private House mHouse;
+    private House mHouse;//如果当中有对象，那么对象也必须是实现了Parcelable接口
 
     @Override
     public String toString() {

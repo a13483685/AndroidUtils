@@ -65,6 +65,9 @@ public class House implements Parcelable {
         this.userName = in.readString();
     }
 
+    /**
+     * 反序列化由CREATOR来完成
+     */
     public static final Creator<House> CREATOR = new Creator<House>() {
         @Override
         public House createFromParcel(Parcel source) {
@@ -76,6 +79,11 @@ public class House implements Parcelable {
             return new House[size];
         }
     };
+    /**
+     * 這个方法必须有，IHouseInterface.aidl文件对应生成的IHouseInterface.java中调用了这个函数
+     * 编写方法和构造方法一致
+     */
+
 
     public void readFromParcel(Parcel reply) {
         this.Location = reply.readString();
