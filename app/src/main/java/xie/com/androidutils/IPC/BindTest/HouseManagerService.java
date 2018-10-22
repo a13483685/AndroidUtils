@@ -2,6 +2,7 @@ package xie.com.androidutils.IPC.BindTest;
 
 import android.app.Service;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.RemoteCallbackList;
@@ -67,6 +68,12 @@ public class HouseManagerService extends Service {
     @Override
     public IBinder onBind(Intent intent) {
         // TODO: Return the communication channel to the service.
+        //权限认证
+        int check = checkCallingOrSelfPermission("xie.com.androidutils.IPC.BindTest.permission.ACCESS_HOUSE_SERVICE");
+        Log.d(TAG, "check=" + check);
+        if(check == PackageManager.PERMISSION_DENIED){
+            return null;
+        }
         return mBinder;
     }
 

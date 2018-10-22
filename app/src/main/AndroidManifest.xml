@@ -2,9 +2,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="xie.com.androidutils">
 
+    <permission
+        android:description="@string/service_description"
+        android:name="xie.com.androidutils.IPC.BindTest.permission.ACCESS_HOUSE_SERVICE"
+        android:protectionLevel="normal" />
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="xie.com.androidutils.IPC.BindTest.permission.ACCESS_HOUSE_SERVICE"/>
+
 
     <application
         android:allowBackup="true"
@@ -34,8 +41,7 @@
             android:name=".IPC.BindTest.HouseManagerService"
             android:enabled="true"
             android:exported="true"
-            android:process=":remote"
-            />
+            android:process=":remote" />
     </application>
 
 </manifest>
