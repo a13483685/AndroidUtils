@@ -4,6 +4,7 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
+import android.os.RemoteCallbackList;
 import android.os.RemoteException;
 import android.util.Log;
 
@@ -17,7 +18,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class HouseManagerService extends Service {
     private static final String TAG = "BMS";
     private CopyOnWriteArrayList<House> mHouseList = new CopyOnWriteArrayList<House>();
-    private CopyOnWriteArrayList<IOnNewHouseArrivedListener> mListenerList = new CopyOnWriteArrayList<IOnNewHouseArrivedListener>();
+//    private CopyOnWriteArrayList<IOnNewHouseArrivedListener> mListenerList = new CopyOnWriteArrayList<IOnNewHouseArrivedListener>();//无法解注册
+    private RemoteCallbackList<IOnNewHouseArrivedListener> mListenerList = new RemoteCallbackList<IOnNewHouseArrivedListener>();
     private AtomicBoolean mIsServiceDestoryed = new AtomicBoolean(false);
 
     private Binder mBinder = new IHouseInterface.Stub() {
@@ -33,24 +35,29 @@ public class HouseManagerService extends Service {
 
         @Override
         public void registerListener(IOnNewHouseArrivedListener listener) throws RemoteException {
-            if (!mListenerList.contains(listener)) {
-                mListenerList.add(listener);
-            } else {
-                Log.d(TAG, "already exits");
-            }
-            Log.d(TAG, "registerListener,size:" + mListenerList.size());
+            mListenerList.register(listener);
+            Log.e(TAG,"regist count is :"+mListenerList.getRegisteredCallbackCount());
+//            if (!mListenerList.contains(listener)) {
+//                mListenerList.add(listener);
+//            } else {
+//                Log.d(TAG, "already exits");
+//            }
+//            Log.d(TAG, "registerListener,size:" + mListenerList.size());
 
         }
 
         @Override
         public void unregisterListener(IOnNewHouseArrivedListener listener) throws RemoteException {
-            if (mListenerList.contains(listener)) {
-                mListenerList.remove(listener);
-                Log.d(TAG, "unregister success.");
-            } else {
-                Log.d(TAG, "not found ,can not register.");
-            }
-            Log.d(TAG, "not found ,can not register.");
+            mListenerList.unregister(listener);
+            Log.e(TAG,"regist count is :"+mListenerList.getRegisteredCallbackCount());
+
+//            if (mListenerList.contains(listener)) {
+//                mListenerList.remove(listener);
+//                Log.d(TAG, "unregister success.");
+//            } else {
+//                Log.d(TAG, "not found ,can not register.");
+//            }
+//            Log.d(TAG, "not found ,can not register.");
         }
     };
 
@@ -108,10 +115,18 @@ public class HouseManagerService extends Service {
      */
     private void onNewBookArrived(House newHouse) throws RemoteException{
         mHouseList.add(newHouse);
-        for (int i=0;i<mListenerList.size();i++){
-            IOnNewHouseArrivedListener listener = mListenerList.get(i);
-            Log.d(TAG,"OnNewBookArried,notify listener:"+listener);
-            listener.onNewHouseArrived(newHouse);
+        final int N = mListenerList.beginBroadcast();
+        for(int i = 0;i<N;i++){
+            IOnNewHouseArrivedListener broadcastItem = mListenerList.getBroadcastItem(i);
+            if(broadcastItem!=null){
+                broadcastItem.onNewHouseArrived(newHouse);
+            }
         }
+        mListenerList.finishBroadcast();
+//        for (int i=0;i<mListenerList.size();i++){
+//            IOnNewHouseArrivedListener listener = mListenerList.get(i);
+//            Log.d(TAG,"OnNewBookArried,notify listener:"+listener);
+//            listener.onNewHouseArrived(newHouse);
+//        }
     }
 }
