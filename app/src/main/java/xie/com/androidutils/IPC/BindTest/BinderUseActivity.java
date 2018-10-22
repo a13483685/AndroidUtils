@@ -45,6 +45,13 @@ public class BinderUseActivity extends AppCompatActivity {
         }
     };
 
+    private IBinder.DeathRecipient mDeathRecipient = new IBinder.DeathRecipient() {
+        @Override
+        public void binderDied() {
+            iHouseManager.asBinder().unlinkToDeath(mDeathRecipient,0);
+            iHouseManager = null;
+        }
+    };
 
     private ServiceConnection mConnection = new ServiceConnection() {
 
@@ -52,6 +59,7 @@ public class BinderUseActivity extends AppCompatActivity {
         public void onServiceConnected(ComponentName name, IBinder service) {
             iHouseManager = IHouseInterface.Stub.asInterface(service);
             try {
+                iHouseManager.asBinder().linkToDeath(mDeathRecipient,0);
                 List<House> houseList = iHouseManager.getHouseList();
                 Log.i(TAG, "query book list,list type :" + houseList.getClass().getCanonicalName());
                 Log.i(TAG, "query book list,list type :" + houseList.toString());
@@ -67,6 +75,7 @@ public class BinderUseActivity extends AppCompatActivity {
         public void onServiceDisconnected(ComponentName name) {
             iHouseManager = null;
             Log.i(TAG, "onServiceDisconnected:binder died");
+
         }
     };
 
