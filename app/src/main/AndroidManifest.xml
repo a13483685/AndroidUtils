@@ -48,7 +48,12 @@
             android:permission="xie.com.PROVIDER"
             android:process=":provider" />
 
-        <activity android:name=".IPC.ContentProviderTest.ProviderActivity"></activity>
+        <activity android:name=".IPC.ContentProviderTest.ProviderActivity" />
+
+        <service
+            android:name=".IPC.BinderPool.BinderPoolService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>
