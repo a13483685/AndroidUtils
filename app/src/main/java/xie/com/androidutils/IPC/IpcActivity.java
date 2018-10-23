@@ -11,6 +11,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import xie.com.androidutils.IPC.BindTest.BinderUseActivity;
+import xie.com.androidutils.IPC.BinderPool.BindPoolActivity;
 import xie.com.androidutils.IPC.ContentProviderTest.ProviderActivity;
 import xie.com.androidutils.IPC.Parcel.ParcelTestActivity;
 import xie.com.androidutils.R;
@@ -25,6 +26,8 @@ public class IpcActivity extends Activity {
     Button bindUse;
     @InjectView(R.id.contentProvider)
     Button contentProvider;
+    @InjectView(R.id.bind_poll_activity)
+    Button bindPollActivity;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,7 +36,7 @@ public class IpcActivity extends Activity {
         ButterKnife.inject(this);
     }
 
-    @OnClick({R.id.pacelable_test, R.id.bind_use,R.id.contentProvider})
+    @OnClick({R.id.pacelable_test, R.id.bind_use, R.id.contentProvider,R.id.bind_poll_activity})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.pacelable_test:
@@ -46,9 +49,10 @@ public class IpcActivity extends Activity {
                 break;
 
             case R.id.contentProvider:
-                startActivity(new Intent(this,ProviderActivity.class));
+                startActivity(new Intent(this, ProviderActivity.class));
                 break;
-
+            case R.id.bind_poll_activity:
+                startActivity(new Intent(this, BindPoolActivity.class));
         }
 
     }

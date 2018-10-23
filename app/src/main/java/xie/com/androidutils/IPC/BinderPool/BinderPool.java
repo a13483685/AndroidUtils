@@ -14,9 +14,9 @@ public class BinderPool {
      * binder连接池的具体实现，方式每一个aidl都要写一个service，这样应用程序会显得非常冗余
      */
     private static final String TAG = "BinderPool";
-    private static final int BINDER_NONE = -1;
-    private static final int BINDER_COMPUTE = 0;
-    private static final int BINDER_SECURITY_CENTER = 1;
+    public static final int BINDER_NONE = -1;
+    public static final int BINDER_COMPUTE = 0;
+    public static final int BINDER_SECURITY_CENTER = 1;
 
     private Context mContext = null;
     private IBinderPool mBinderPool;
@@ -79,8 +79,16 @@ public class BinderPool {
         }
     }
 
-    public IBinder queryBinder(){
-        return null;
+    public IBinder queryBinder(int bindCode){
+        IBinder binder = null;
+        if(mBinderPool!=null){
+            try {
+                binder = mBinderPool.queryBinder(bindCode);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+        }
+        return binder;
     }
 
 
@@ -105,8 +113,4 @@ public class BinderPool {
             return binder;
         }
     }
-
-
-
-
 }

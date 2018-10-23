@@ -27,4 +27,12 @@
         android:textAllCaps="false"
         />
 
+    <Button
+        android:id="@+id/bind_poll_activity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="bind池的用法"
+        android:textAllCaps="false"
+        />
+
 </LinearLayout>
