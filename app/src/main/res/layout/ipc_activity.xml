@@ -19,5 +19,12 @@
         android:text="bind的用法"
         android:textAllCaps="false"
         />
+    <Button
+        android:id="@+id/contentProvider"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="contentProvider的用法"
+        android:textAllCaps="false"
+        />
 
 </LinearLayout>

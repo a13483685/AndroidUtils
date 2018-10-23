@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 import xie.com.androidutils.Activities.MeterDesignerActivity;
-import xie.com.androidutils.IPC.Parcel.IpcActivity;
+import xie.com.androidutils.IPC.IpcActivity;
 import xie.com.androidutils.ImageLoader.ImageLoaderActivity;
 import xie.com.androidutils.Timer.TimerActivity;
 

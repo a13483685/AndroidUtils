@@ -3,15 +3,14 @@
     package="xie.com.androidutils">
 
     <permission
-        android:description="@string/service_description"
         android:name="xie.com.androidutils.IPC.BindTest.permission.ACCESS_HOUSE_SERVICE"
+        android:description="@string/service_description"
         android:protectionLevel="normal" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="xie.com.androidutils.IPC.BindTest.permission.ACCESS_HOUSE_SERVICE"/>
-
+    <uses-permission android:name="xie.com.androidutils.IPC.BindTest.permission.ACCESS_HOUSE_SERVICE" />
 
     <application
         android:allowBackup="true"
@@ -32,7 +31,7 @@
         <activity android:name=".Activities.CardViewActitivy" />
         <activity android:name=".MeterDesigner.RecyclerViewTestActivity" />
         <activity android:name=".ImageLoader.ImageLoaderActivity" />
-        <activity android:name=".IPC.Parcel.IpcActivity" />
+        <activity android:name=".IPC.IpcActivity" />
         <activity android:name=".IPC.Parcel.ParcelTestActivity" />
         <activity android:name=".IPC.Parcel.ParcelSecondActivity" />
         <activity android:name=".IPC.BindTest.BinderUseActivity" />
@@ -42,6 +41,14 @@
             android:enabled="true"
             android:exported="true"
             android:process=":remote" />
+
+        <provider
+            android:name=".IPC.ContentProviderTest.BookProvider"
+            android:authorities="xie.com.androidutils.IPC.BindTest.book.provider"
+            android:permission="xie.com.PROVIDER"
+            android:process=":provider" />
+
+        <activity android:name=".IPC.ContentProviderTest.ProviderActivity"></activity>
     </application>
 
 </manifest>

@@ -33,6 +33,6 @@ public class RecyclerViewGallery extends AppCompatActivity {
     }
 
     private void initData() {
-        list = new ArrayList<>(Arrays.asList(R.drawable.a, R.drawable.b, R.drawable.c, R.drawable.d, R.drawable.e, R.drawable.f));
+//        list = new ArrayList<>(Arrays.asList(R.drawable.a, R.drawable.b, R.drawable.c, R.drawable.d, R.drawable.e, R.drawable.f));
     }
 }
