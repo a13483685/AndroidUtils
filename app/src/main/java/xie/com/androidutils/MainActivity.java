@@ -22,7 +22,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button mImageLoader = null;
     private Button mIpc = null;
     private Button mView = null;
+<<<<<<< HEAD
     private Button mActivity =null;
+=======
+>>>>>>> origin/master
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,8 +40,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mIpc.setOnClickListener(this);
         mView = findViewById(R.id.view_test);
         mView.setOnClickListener(this);
+<<<<<<< HEAD
         mActivity = findViewById(R.id.activity_mode);
         mActivity.setOnClickListener(this);
+=======
+>>>>>>> origin/master
     }
 
     @Override
@@ -57,6 +63,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.ipc:
                 startActivity(new Intent(this,IpcActivity.class));
+<<<<<<< HEAD
                 break;
             case R.id.view_test:
                 startActivity(new Intent(this,ViewTestActivity.class));
@@ -64,6 +71,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.activity_mode:
                 startActivity(new Intent(this,AvtivityMode.class));
                 break;
+=======
+            case R.id.view_test:
+                startActivity(new Intent(this,ViewTestActivity.class));
+>>>>>>> origin/master
         }
     }
 }

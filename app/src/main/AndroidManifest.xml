@@ -56,11 +56,15 @@
             android:exported="true" />
 
         <activity android:name=".IPC.BinderPool.BindPoolActivity" />
+<<<<<<< HEAD
         <activity android:name=".View.ViewTestActivity" />
         <activity android:name=".ActivityMode.AvtivityMode" />
         <activity android:name=".ActivityMode.singleTopActivity"
             android:launchMode="singleTop"
             />
+=======
+        <activity android:name=".View.ViewTestActivity"></activity>
+>>>>>>> origin/master
     </application>
 
 </manifest>

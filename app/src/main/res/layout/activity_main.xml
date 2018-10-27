@@ -43,6 +43,7 @@
         android:textAllCaps="false"
         android:layout_below="@id/ipc"
         />
+<<<<<<< HEAD
 
     <Button
         android:id="@+id/activity_mode"
@@ -52,6 +53,8 @@
         android:text="Activity相关"
         android:textAllCaps="false"
         />
+=======
+>>>>>>> origin/master
 
 
 </RelativeLayout>
