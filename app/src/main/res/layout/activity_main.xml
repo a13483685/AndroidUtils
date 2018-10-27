@@ -35,6 +35,23 @@
         android:layout_height="wrap_content"
         android:text="进程通信"
         />
+    <Button
+        android:id="@+id/view_test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="View用法"
+        android:textAllCaps="false"
+        android:layout_below="@id/ipc"
+        />
+
+    <Button
+        android:id="@+id/activity_mode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/view_test"
+        android:text="Activity相关"
+        android:textAllCaps="false"
+        />
 
 
 </RelativeLayout>

@@ -1,7 +1,7 @@
 // IBinderPool.aidl
 package xie.com.androidutils.IPC.BinderPool;
 
-// Declare any non-default types here with import statements
+// 用来查询，调用那个binder
 
 interface IBinderPool {
     IBinder queryBinder(int binderCode);

@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">AndroidUtils</string>
     <string name="service_description">HouseManagerService服务中要验证的权限</string>
+    <string name="singleTopMsg">栈顶复用模式，在这种模式下，如果Activity已经于任务栈的栈顶，那么此Activity不会被重新创建，同时它的onNewIntent方法会被回调，通过此方法的参数我们可以去除前请求的信息。需要注意的是，这个Activity的onCreate、onStart不会被系统调用，因为它并没有发生改变。如果新Activity的实例已经存在但不是位于栈顶，那么新Activity，仍然会重新重建。举个例子
+    举个例子,假设目前内的情况为ABCD,其中ABCD为四个 Activity,A位于线底,D位干栈顶,这个时候假设要再次启动D,如果D的启动模式为 singleTop,那么栈内的情况仍然为ABCD;如果D的启动模式为 standard,那么由于D被重新创建,导致栈内的情况就变为 ABCDD
+    </string>
 </resources>
