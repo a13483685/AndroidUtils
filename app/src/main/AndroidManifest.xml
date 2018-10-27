@@ -55,7 +55,8 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".IPC.BinderPool.BindPoolActivity"></activity>
+        <activity android:name=".IPC.BinderPool.BindPoolActivity" />
+        <activity android:name=".View.ViewTestActivity"></activity>
     </application>
 
 </manifest>

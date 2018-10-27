@@ -42,14 +42,14 @@ public class BindPoolActivity extends AppCompatActivity {
     }
 
     private void dowork() {
-        BinderPool binderPool = BinderPool.getInstance(this);
-        IBinder securityBinder = binderPool.queryBinder(BinderPool.BINDER_SECURITY_CENTER);
-        ISecurityCenter iSecurityCenter =SecurityCenterImpl.asInterface(securityBinder);
+        BinderPool binderPool = BinderPool.getInstance(this);//BinderPool 实例化
+        IBinder securityBinder = binderPool.queryBinder(BinderPool.BINDER_SECURITY_CENTER);//要使用哪个binder
+        ISecurityCenter iSecurityCenter =SecurityCenterImpl.asInterface(securityBinder);//获取接口
         Log.d(TAG,"visit ISecurityCenter");
         String msg = "hello android";
         Log.d(TAG,"msg is :"+msg);
         try {
-            String password = iSecurityCenter.decrypt(msg);
+            String password = iSecurityCenter.decrypt(msg);//调用接口里的方法
             Log.d(TAG,"password is :"+password);
         } catch (RemoteException e) {
             e.printStackTrace();
